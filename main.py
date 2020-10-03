@@ -26,7 +26,7 @@ emu = PyBoy(filename) # , window_type="headless" if quiet else "SDL2", window_sc
 # emu = PyBoy(filename, window_type="headless" if quiet else "SDL2", window_scale=3, debug=not quiet) # , game_wrapper=True)
 
 emu.set_emulation_speed(1)
-assert emu.cartridge_title() == "G&W GALLERY"
+assert emu.cartridge_title() == "G&W GALLERY" # do not proceed if the is not Game & Watch Gallery
 
 # for _ in range(480):
 #     emu.tick()
@@ -98,13 +98,22 @@ def getNPClocations(spriteList):
             NPClocations.append((NPCsprite.x, NPCsprite.y))
     return NPClocations
 
-
+manSpriteIndices = emu.botsupport_manager().sprite_by_tile_identifier(list(range(16,24,2)))
+NPClocations = (getNPClocations(manSpriteIndices))
+lastNPClocations = NPClocations.copy()
 while True:
-    for _ in range(240):
-        emu.tick()
+    # for _ in range(240):
+        # emu.tick()
+    emu.tick()
     # sprite identifer for the NPC characters range from 16 - 23 and 32 - 39
     # 32 - 39 is the "bottom half" of 16 - 23, so we don't need it for finding their locations
     # we can iterate by 2 because the NPC is 2 sprites wide
     manSpriteIndices = emu.botsupport_manager().sprite_by_tile_identifier(list(range(16,24,2)))
-    print(getNPClocations(manSpriteIndices))
+    lastNPClocations = NPClocations
+    NPClocations = (getNPClocations(manSpriteIndices))
+    if NPClocations != lastNPClocations:
+        if(NPClocations):
+            print(NPClocations)
+        
+    
     
