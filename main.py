@@ -98,6 +98,19 @@ def getNPClocations(spriteList):
             NPClocations.append((NPCsprite.x, NPCsprite.y))
     return NPClocations
 
+def move(dir1, dir1Release, dir2, dir2Release):
+    previousScore = getScore()
+    misses = getMissCount()
+    emu.send_input(dir1)
+    emu.tick()
+    emu.send_input(dir2)
+    emu.tick()
+    emu.send_input(dir1Release)
+    emu.tick()
+    emu.send_input(dir2Release)
+    while ((previousScore == getScore()) & (misses == getMissCount())): # do not move until you've picked up this NPC
+        emu.tick()
+
 manSpriteIndices = emu.botsupport_manager().sprite_by_tile_identifier(list(range(16,24,2)))
 NPClocations = (getNPClocations(manSpriteIndices))
 lastNPClocations = NPClocations.copy()
@@ -114,37 +127,13 @@ while True:
             print(NPClocations)
     
     if (32, 25) in NPClocations:
-        emu.send_input(WindowEvent.PRESS_ARROW_LEFT)
-        emu.tick()
-        emu.send_input(WindowEvent.PRESS_ARROW_UP)
-        emu.tick()
-        emu.send_input(WindowEvent.RELEASE_ARROW_LEFT)
-        emu.tick()
-        emu.send_input(WindowEvent.RELEASE_ARROW_UP)
+        move(WindowEvent.PRESS_ARROW_LEFT, WindowEvent.RELEASE_ARROW_LEFT, WindowEvent.PRESS_ARROW_UP, WindowEvent.RELEASE_ARROW_UP)
     elif (80, 25) in NPClocations:
-        emu.send_input(WindowEvent.PRESS_ARROW_RIGHT)
-        emu.tick()
-        emu.send_input(WindowEvent.PRESS_ARROW_UP)
-        emu.tick()
-        emu.send_input(WindowEvent.RELEASE_ARROW_RIGHT)
-        emu.tick()
-        emu.send_input(WindowEvent.RELEASE_ARROW_UP)
+        move(WindowEvent.PRESS_ARROW_RIGHT, WindowEvent.RELEASE_ARROW_RIGHT, WindowEvent.PRESS_ARROW_UP, WindowEvent.RELEASE_ARROW_UP)
     elif (72, 89) in NPClocations:
-        emu.send_input(WindowEvent.PRESS_ARROW_LEFT)
-        emu.tick()
-        emu.send_input(WindowEvent.PRESS_ARROW_DOWN)
-        emu.tick()
-        emu.send_input(WindowEvent.RELEASE_ARROW_LEFT)
-        emu.tick()
-        emu.send_input(WindowEvent.RELEASE_ARROW_DOWN)
+        move(WindowEvent.PRESS_ARROW_LEFT, WindowEvent.RELEASE_ARROW_LEFT, WindowEvent.PRESS_ARROW_DOWN, WindowEvent.RELEASE_ARROW_DOWN)
     elif (120, 89) in NPClocations:
-        emu.send_input(WindowEvent.PRESS_ARROW_RIGHT)
-        emu.tick()
-        emu.send_input(WindowEvent.PRESS_ARROW_DOWN)
-        emu.tick()
-        emu.send_input(WindowEvent.RELEASE_ARROW_RIGHT)
-        emu.tick()
-        emu.send_input(WindowEvent.RELEASE_ARROW_DOWN)
+        move(WindowEvent.PRESS_ARROW_RIGHT, WindowEvent.RELEASE_ARROW_RIGHT, WindowEvent.PRESS_ARROW_DOWN, WindowEvent.RELEASE_ARROW_DOWN)
     emu.tick()
     
     
