@@ -23,8 +23,60 @@ else:
 quiet = "--quiet" in sys.argv
 pyboy = PyBoy(filename) # , window_type="headless" if quiet else "SDL2", window_scale=3, debug=not quiet, game_wrapper=True)
 # pyboy.set_emulation_speed(0)
-print(pyboy.cartridge_title())
 assert pyboy.cartridge_title() == "G&W GALLERY"
+
+for _ in range(480):
+    pyboy.tick()
+print("press A")
+pyboy.send_input(WindowEvent.PRESS_BUTTON_A)
+for _ in range(12):
+    pyboy.tick()
+pyboy.send_input(WindowEvent.RELEASE_BUTTON_A)
+
+for _ in range(240):
+    pyboy.tick()
+print("press left")
+pyboy.send_input(WindowEvent.PRESS_ARROW_LEFT)
+for _ in range(6):
+    pyboy.tick()
+pyboy.send_input(WindowEvent.RELEASE_ARROW_LEFT)
+
+for _ in range(60):
+    pyboy.tick()
+pyboy.send_input(WindowEvent.PRESS_BUTTON_A)
+for _ in range(12):
+    pyboy.tick()
+pyboy.send_input(WindowEvent.RELEASE_BUTTON_A)
+
+for _ in range(60):
+    pyboy.tick()
+pyboy.send_input(WindowEvent.PRESS_BUTTON_A)
+for _ in range(12):
+    pyboy.tick()
+pyboy.send_input(WindowEvent.RELEASE_BUTTON_A)
+
+for _ in range(60):
+    pyboy.tick()
+pyboy.send_input(WindowEvent.PRESS_ARROW_DOWN)
+for _ in range(12):
+    pyboy.tick()
+pyboy.send_input(WindowEvent.RELEASE_ARROW_DOWN)
+
+for _ in range(60):
+    pyboy.tick()
+pyboy.send_input(WindowEvent.PRESS_ARROW_RIGHT)
+for _ in range(12):
+    pyboy.tick()
+pyboy.send_input(WindowEvent.RELEASE_ARROW_RIGHT)
+
+for _ in range(60):
+    pyboy.tick()
+pyboy.send_input(WindowEvent.PRESS_BUTTON_A)
+for _ in range(12):
+    pyboy.tick()
+pyboy.send_input(WindowEvent.RELEASE_BUTTON_A)
+# for _ in range(60):
+#     pyboy.tick()
 
 while not pyboy.tick():
     pass
