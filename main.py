@@ -28,42 +28,42 @@ emu = PyBoy(filename) # , window_type="headless" if quiet else "SDL2", window_sc
 emu.set_emulation_speed(1)
 assert emu.cartridge_title() == "G&W GALLERY" # do not proceed if the is not Game & Watch Gallery
 
-# for _ in range(480):
-#     emu.tick()
-# print("press A")
-# emu.send_input(WindowEvent.PRESS_BUTTON_A)
-# for _ in range(12):
-#     emu.tick()
-# emu.send_input(WindowEvent.RELEASE_BUTTON_A)
+for _ in range(480):
+    emu.tick()
+print("press A")
+emu.send_input(WindowEvent.PRESS_BUTTON_A)
+for _ in range(12):
+    emu.tick()
+emu.send_input(WindowEvent.RELEASE_BUTTON_A)
 
-# for _ in range(240):
-#     emu.tick()
-# print("press left")
-# emu.send_input(WindowEvent.PRESS_ARROW_LEFT)
-# for _ in range(6):
-#     emu.tick()
-# emu.send_input(WindowEvent.RELEASE_ARROW_LEFT)
+for _ in range(240):
+    emu.tick()
+print("press left")
+emu.send_input(WindowEvent.PRESS_ARROW_LEFT)
+for _ in range(6):
+    emu.tick()
+emu.send_input(WindowEvent.RELEASE_ARROW_LEFT)
 
-# for _ in range(60):
-#     emu.tick()
-# emu.send_input(WindowEvent.PRESS_BUTTON_A)
-# for _ in range(12):
-#     emu.tick()
-# emu.send_input(WindowEvent.RELEASE_BUTTON_A)
+for _ in range(60):
+    emu.tick()
+emu.send_input(WindowEvent.PRESS_BUTTON_A)
+for _ in range(12):
+    emu.tick()
+emu.send_input(WindowEvent.RELEASE_BUTTON_A)
 
-# for _ in range(60):
-#     emu.tick()
-# emu.send_input(WindowEvent.PRESS_BUTTON_A)
-# for _ in range(12):
-#     emu.tick()
-# emu.send_input(WindowEvent.RELEASE_BUTTON_A)
+for _ in range(60):
+    emu.tick()
+emu.send_input(WindowEvent.PRESS_BUTTON_A)
+for _ in range(12):
+    emu.tick()
+emu.send_input(WindowEvent.RELEASE_BUTTON_A)
 
-# for _ in range(60):
-#     emu.tick()
-# emu.send_input(WindowEvent.PRESS_ARROW_DOWN)
-# for _ in range(12):
-#     emu.tick()
-# emu.send_input(WindowEvent.RELEASE_ARROW_DOWN)
+for _ in range(60):
+    emu.tick()
+emu.send_input(WindowEvent.PRESS_ARROW_DOWN)
+for _ in range(12):
+    emu.tick()
+emu.send_input(WindowEvent.RELEASE_ARROW_DOWN)
 
 # for _ in range(60):
 #     emu.tick()
@@ -72,12 +72,12 @@ assert emu.cartridge_title() == "G&W GALLERY" # do not proceed if the is not Gam
 #     emu.tick()
 # emu.send_input(WindowEvent.RELEASE_ARROW_RIGHT)
 
-# for _ in range(60):
-#     emu.tick()
-# emu.send_input(WindowEvent.PRESS_BUTTON_A)
-# for _ in range(12):
-#     emu.tick()
-# emu.send_input(WindowEvent.RELEASE_BUTTON_A)
+for _ in range(60):
+    emu.tick()
+emu.send_input(WindowEvent.PRESS_BUTTON_A)
+for _ in range(12):
+    emu.tick()
+emu.send_input(WindowEvent.RELEASE_BUTTON_A)
 
 def getScore():
     score = 0
@@ -102,9 +102,7 @@ manSpriteIndices = emu.botsupport_manager().sprite_by_tile_identifier(list(range
 NPClocations = (getNPClocations(manSpriteIndices))
 lastNPClocations = NPClocations.copy()
 while True:
-    # for _ in range(240):
-        # emu.tick()
-    emu.tick()
+    # emu.tick()
     # sprite identifer for the NPC characters range from 16 - 23 and 32 - 39
     # 32 - 39 is the "bottom half" of 16 - 23, so we don't need it for finding their locations
     # we can iterate by 2 because the NPC is 2 sprites wide
@@ -114,6 +112,39 @@ while True:
     if NPClocations != lastNPClocations:
         if(NPClocations):
             print(NPClocations)
-        
+    
+    if (32, 25) in NPClocations:
+        emu.send_input(WindowEvent.PRESS_ARROW_LEFT)
+        emu.tick()
+        emu.send_input(WindowEvent.PRESS_ARROW_UP)
+        emu.tick()
+        emu.send_input(WindowEvent.RELEASE_ARROW_LEFT)
+        emu.tick()
+        emu.send_input(WindowEvent.RELEASE_ARROW_UP)
+    elif (80, 25) in NPClocations:
+        emu.send_input(WindowEvent.PRESS_ARROW_RIGHT)
+        emu.tick()
+        emu.send_input(WindowEvent.PRESS_ARROW_UP)
+        emu.tick()
+        emu.send_input(WindowEvent.RELEASE_ARROW_RIGHT)
+        emu.tick()
+        emu.send_input(WindowEvent.RELEASE_ARROW_UP)
+    elif (72, 89) in NPClocations:
+        emu.send_input(WindowEvent.PRESS_ARROW_LEFT)
+        emu.tick()
+        emu.send_input(WindowEvent.PRESS_ARROW_DOWN)
+        emu.tick()
+        emu.send_input(WindowEvent.RELEASE_ARROW_LEFT)
+        emu.tick()
+        emu.send_input(WindowEvent.RELEASE_ARROW_DOWN)
+    elif (120, 89) in NPClocations:
+        emu.send_input(WindowEvent.PRESS_ARROW_RIGHT)
+        emu.tick()
+        emu.send_input(WindowEvent.PRESS_ARROW_DOWN)
+        emu.tick()
+        emu.send_input(WindowEvent.RELEASE_ARROW_RIGHT)
+        emu.tick()
+        emu.send_input(WindowEvent.RELEASE_ARROW_DOWN)
+    emu.tick()
     
     
