@@ -25,7 +25,7 @@ quiet = "--quiet" in sys.argv
 emu = PyBoy(filename) # , window_type="headless" if quiet else "SDL2", window_scale=3, debug=not quiet, game_wrapper=True)
 # emu = PyBoy(filename, window_type="headless" if quiet else "SDL2", window_scale=3, debug=not quiet) # , game_wrapper=True)
 
-emu.set_emulation_speed(1)
+emu.set_emulation_speed(0)
 assert emu.cartridge_title() == "G&W GALLERY" # do not proceed if the is not Game & Watch Gallery
 
 for _ in range(480):
@@ -81,10 +81,14 @@ emu.send_input(WindowEvent.RELEASE_BUTTON_A)
 
 def getScore():
     score = 0
-    score += int(emu.get_memory_value(0xC114))
-    score += int(emu.get_memory_value(0xC113)) * 10
-    score += int(emu.get_memory_value(0xC112)) * 100
+    # player's score is located at this location
+    score += (emu.get_memory_value(0xC114))
+    score += (emu.get_memory_value(0xC113)) * 10
+    score += (emu.get_memory_value(0xC112)) * 100
     return score
+
+def getMissCount():
+    return emu.get_memory_value(0xC115)
 
 # while not emu.tick():
 #     # print(getScore())
