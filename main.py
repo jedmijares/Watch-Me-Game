@@ -90,9 +90,21 @@ def getScore():
 #     # print(getScore())
 #     pass
 
+def getNPClocations(spriteList):
+    NPClocations = []
+    for sublist in spriteList:
+        for spriteIndex in sublist:
+            NPCsprite = emu.botsupport_manager().sprite(spriteIndex)
+            NPClocations.append((NPCsprite.x, NPCsprite.y))
+    return NPClocations
+
+
 while True:
     for _ in range(240):
         emu.tick()
-    # print(emu.botsupport_manager().sprite(0))
-    # print(emu.botsupport_manager().sprite_by_tile_identifier(list(range(16,23)) + list(range(32,39))))
-    print(emu.botsupport_manager().sprite_by_tile_identifier(list(range(16,24,2))))
+    # sprite identifer for the NPC characters range from 16 - 23 and 32 - 39
+    # 32 - 39 is the "bottom half" of 16 - 23, so we don't need it for finding their locations
+    # we can iterate by 2 because the NPC is 2 sprites wide
+    manSpriteIndices = emu.botsupport_manager().sprite_by_tile_identifier(list(range(16,24,2)))
+    print(getNPClocations(manSpriteIndices))
+    
