@@ -22,8 +22,8 @@ else:
     filename = r"./ROM/Game & Watch Gallery (USA).gb"
 
 quiet = "--quiet" in sys.argv
-# pyboy = PyBoy(filename) # , window_type="headless" if quiet else "SDL2", window_scale=3, debug=not quiet, game_wrapper=True)
-emu = PyBoy(filename, window_type="headless" if quiet else "SDL2", window_scale=3, debug=not quiet) # , game_wrapper=True)
+emu = PyBoy(filename) # , window_type="headless" if quiet else "SDL2", window_scale=3, debug=not quiet, game_wrapper=True)
+# emu = PyBoy(filename, window_type="headless" if quiet else "SDL2", window_scale=3, debug=not quiet) # , game_wrapper=True)
 
 emu.set_emulation_speed(1)
 assert emu.cartridge_title() == "G&W GALLERY"
@@ -114,7 +114,8 @@ def getScore():
 # bot = pyboy.botsupport(pyboy, 0)
 # print()
 
+
 while True:
     for _ in range(60):
         emu.tick()
-    # print(pyboy.())
+    print(emu.botsupport_manager().sprite(0))
