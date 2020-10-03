@@ -22,7 +22,7 @@ else:
 
 quiet = "--quiet" in sys.argv
 pyboy = PyBoy(filename) # , window_type="headless" if quiet else "SDL2", window_scale=3, debug=not quiet, game_wrapper=True)
-# pyboy.set_emulation_speed(0)
+pyboy.set_emulation_speed(1)
 assert pyboy.cartridge_title() == "G&W GALLERY"
 
 for _ in range(480):
@@ -75,31 +75,24 @@ pyboy.send_input(WindowEvent.PRESS_BUTTON_A)
 for _ in range(12):
     pyboy.tick()
 pyboy.send_input(WindowEvent.RELEASE_BUTTON_A)
-# for _ in range(60):
-#     pyboy.tick()
 
-while not pyboy.tick():
-    pass
+def getScore():
+    score = 0
+    score += int(pyboy.get_memory_value(0xC114))
+    score += int(pyboy.get_memory_value(0xC113)) * 10
+    score += int(pyboy.get_memory_value(0xC112)) * 100
+    return score
 
-# gaw = pyboy.game_wrapper()
-# gaw.start_game()
+# while not pyboy.tick():
+#     # print(getScore())
+#     pass
 
-# assert kirby.score == 0
-# assert kirby.lives_left == 4
-# assert kirby.health == 6
-
-# pyboy.send_input(WindowEvent.PRESS_ARROW_RIGHT)
-
-# for _ in range(280): # Walk for 280 ticks
-#     pyboy.tick()
-
-# assert kirby.score == 800
-# assert kirby.health == 5
-
-# print(kirby)
-
-# kirby.reset_game()
-# assert kirby.score == 0
-# assert kirby.health == 6
-
-# pyboy.stop()
+while True:
+    pyboy.send_input(WindowEvent.PRESS_ARROW_UP)
+    pyboy.tick()
+    pyboy.send_input(WindowEvent.RELEASE_ARROW_UP)
+    # pyboy.tick()
+    pyboy.send_input(WindowEvent.PRESS_BUTTON_A)
+    pyboy.tick()
+    pyboy.send_input(WindowEvent.RELEASE_BUTTON_A)
+    # pyboy.tick()
