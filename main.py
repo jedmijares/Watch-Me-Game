@@ -90,31 +90,6 @@ def getScore():
 #     # print(getScore())
 #     pass
 
-# def game_area():
-#         """
-#         This method returns a cut-out of the screen as a simplified matrix for use in machine learning applications.
-#         Returns
-#         -------
-#         memoryview:
-#             Simplified 2-dimensional memoryview of the screen
-#         """
-#         tiles_matrix = pyboy._game_area_tiles()
-#         sprites = pyboy._sprites_on_screen()
-#         xx = pyboy.game_area_section[0]
-#         yy = pyboy.game_area_section[1]
-#         width = pyboy.game_area_section[2]
-#         height = pyboy.game_area_section[3]
-#         for s in sprites:
-#             _x = (s.x // 8) - xx
-#             _y = (s.y // 8) - yy
-#             if 0 <= _y < height and 0 <= _x < width:
-#                 tiles_matrix[_y][_x] = s.tile_identifier
-#         return tiles_matrix
-
-# bot = pyboy.botsupport(pyboy, 0)
-# print()
-
-
 while True:
     for _ in range(240):
         emu.tick()
