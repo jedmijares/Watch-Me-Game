@@ -17,11 +17,10 @@ else:
     filename = r"./ROM/Game & Watch Gallery (USA).gb"
 
 quiet = "--quiet" in sys.argv
-emu = PyBoy(filename) # , window_type="headless" if quiet else "SDL2", window_scale=3, debug=not quiet, game_wrapper=True)
-# emu = PyBoy(filename, window_type="headless" if quiet else "SDL2", window_scale=3, debug=not quiet) # , game_wrapper=True)
+emu = PyBoy(filename)
 
 emu.set_emulation_speed(0)
-assert emu.cartridge_title() == "G&W GALLERY" # do not proceed if the is not Game & Watch Gallery
+assert emu.cartridge_title() == "G&W GALLERY" # do not proceed if this is not Game & Watch Gallery
 
 # get player's score
 def getScore():
