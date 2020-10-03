@@ -116,6 +116,8 @@ def getScore():
 
 
 while True:
-    for _ in range(60):
+    for _ in range(240):
         emu.tick()
-    print(emu.botsupport_manager().sprite(0))
+    # print(emu.botsupport_manager().sprite(0))
+    # print(emu.botsupport_manager().sprite_by_tile_identifier(list(range(16,23)) + list(range(32,39))))
+    print(emu.botsupport_manager().sprite_by_tile_identifier(list(range(16,24,2))))
