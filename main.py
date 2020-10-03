@@ -65,12 +65,12 @@ for _ in range(12):
     emu.tick()
 emu.send_input(WindowEvent.RELEASE_ARROW_DOWN)
 
-# for _ in range(60):
-#     emu.tick()
-# emu.send_input(WindowEvent.PRESS_ARROW_RIGHT)
-# for _ in range(12):
-#     emu.tick()
-# emu.send_input(WindowEvent.RELEASE_ARROW_RIGHT)
+for _ in range(60):
+    emu.tick()
+emu.send_input(WindowEvent.PRESS_ARROW_RIGHT)
+for _ in range(12):
+    emu.tick()
+emu.send_input(WindowEvent.RELEASE_ARROW_RIGHT)
 
 for _ in range(60):
     emu.tick()
@@ -99,7 +99,8 @@ def getNPClocations(spriteList):
     for sublist in spriteList:
         for spriteIndex in sublist:
             NPCsprite = emu.botsupport_manager().sprite(spriteIndex)
-            NPClocations.append((NPCsprite.x, NPCsprite.y))
+            if NPCsprite.x in {32, 80, 72, 120}:
+                NPClocations.append((NPCsprite.x, NPCsprite.y))
     return NPClocations
 
 def move(dir1, dir1Release, dir2, dir2Release):
@@ -112,8 +113,10 @@ def move(dir1, dir1Release, dir2, dir2Release):
     emu.send_input(dir1Release)
     emu.tick()
     emu.send_input(dir2Release)
-    while ((previousScore == getScore()) & (misses == getMissCount())): # do not move until you've picked up this NPC
+    while ((previousScore == getScore())): # do not move until you've picked up this NPC
         emu.tick()
+        if (misses != getMissCount()):
+            previousScore -= 1
 
 manSpriteIndices = emu.botsupport_manager().sprite_by_tile_identifier(list(range(16,24,2)))
 NPClocations = (getNPClocations(manSpriteIndices))
@@ -126,18 +129,20 @@ while True:
     manSpriteIndices = emu.botsupport_manager().sprite_by_tile_identifier(list(range(16,24,2)))
     lastNPClocations = NPClocations
     NPClocations = (getNPClocations(manSpriteIndices))
-    if NPClocations != lastNPClocations:
-        if(NPClocations):
-            print(NPClocations)
-    
-    if (32, 25) in NPClocations:
-        move(WindowEvent.PRESS_ARROW_LEFT, WindowEvent.RELEASE_ARROW_LEFT, WindowEvent.PRESS_ARROW_UP, WindowEvent.RELEASE_ARROW_UP)
-    elif (80, 25) in NPClocations:
-        move(WindowEvent.PRESS_ARROW_RIGHT, WindowEvent.RELEASE_ARROW_RIGHT, WindowEvent.PRESS_ARROW_UP, WindowEvent.RELEASE_ARROW_UP)
-    elif (72, 89) in NPClocations:
-        move(WindowEvent.PRESS_ARROW_LEFT, WindowEvent.RELEASE_ARROW_LEFT, WindowEvent.PRESS_ARROW_DOWN, WindowEvent.RELEASE_ARROW_DOWN)
-    elif (120, 89) in NPClocations:
-        move(WindowEvent.PRESS_ARROW_RIGHT, WindowEvent.RELEASE_ARROW_RIGHT, WindowEvent.PRESS_ARROW_DOWN, WindowEvent.RELEASE_ARROW_DOWN)
+    # if NPClocations != lastNPClocations:
+    if(NPClocations):
+        print(NPClocations)
+
+        if (32, 25) == NPClocations[0]:
+            move(WindowEvent.PRESS_ARROW_LEFT, WindowEvent.RELEASE_ARROW_LEFT, WindowEvent.PRESS_ARROW_UP, WindowEvent.RELEASE_ARROW_UP)
+        elif (80, 25) == NPClocations[0]:
+            move(WindowEvent.PRESS_ARROW_RIGHT, WindowEvent.RELEASE_ARROW_RIGHT, WindowEvent.PRESS_ARROW_UP, WindowEvent.RELEASE_ARROW_UP)
+        elif (72, 89) == NPClocations[0]:
+            move(WindowEvent.PRESS_ARROW_LEFT, WindowEvent.RELEASE_ARROW_LEFT, WindowEvent.PRESS_ARROW_DOWN, WindowEvent.RELEASE_ARROW_DOWN)
+        elif (120, 89) == NPClocations[0]:
+            move(WindowEvent.PRESS_ARROW_RIGHT, WindowEvent.RELEASE_ARROW_RIGHT, WindowEvent.PRESS_ARROW_DOWN, WindowEvent.RELEASE_ARROW_DOWN)
     emu.tick()
-    
+
+    # if getMissCount():
+    #     print(getMissCount())
     
