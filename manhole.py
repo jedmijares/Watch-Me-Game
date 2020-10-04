@@ -58,7 +58,7 @@ def move(dir1, dir1Release, dir2, dir2Release):
         emu.tick()
 
 # navigate to Manhole game
-for _ in range(480):
+for _ in range(360):
     emu.tick()
 emu.send_input(WindowEvent.PRESS_BUTTON_A)
 for _ in range(12):
