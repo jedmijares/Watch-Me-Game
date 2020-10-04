@@ -122,6 +122,8 @@ while not emu.tick():
             move(WindowEvent.PRESS_ARROW_RIGHT, WindowEvent.RELEASE_ARROW_RIGHT)
             move(WindowEvent.PRESS_ARROW_RIGHT, WindowEvent.RELEASE_ARROW_RIGHT)
     
-    # if misses != getMissCount():
-    #     misses += 1
-    #     print("miss", misses)
+    if misses < 4:
+        if misses != getMissCount():
+            misses += 1
+            print("miss", misses)
+            print(NPClocations)
