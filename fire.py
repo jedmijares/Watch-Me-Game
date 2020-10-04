@@ -16,7 +16,6 @@ if len(sys.argv) > 1:
 else:
     filename = r"./ROM/Game & Watch Gallery (USA).gb"
 
-quiet = "--quiet" in sys.argv
 emu = PyBoy(filename) # , window_type="headless" if quiet else "SDL2", window_scale=3, debug=not quiet, game_wrapper=True)
 # emu = PyBoy(filename, window_type="headless" if quiet else "SDL2", window_scale=3, debug=not quiet) # , game_wrapper=True)
 

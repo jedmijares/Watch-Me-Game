@@ -16,7 +16,6 @@ if len(sys.argv) > 1:
 else:
     filename = r"./ROM/Game & Watch Gallery (USA).gb"
 
-quiet = "--quiet" in sys.argv
 emu = PyBoy(filename)
 
 emu.set_emulation_speed(0)
