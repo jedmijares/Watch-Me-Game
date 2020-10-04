@@ -10,11 +10,11 @@ Finding integer values like the current score was simple enough - I used [VBA-M'
 
 <img src="https://github.com/jedmijares/Watch-Me-Game/blob/main/media/spriteDebugging.png" alt="Debug Interface" width="600"/>
 
-Thankfully, PyBoy offers some helpful debugging tools that let me proceed. By observing the sprite and tile data tables as I played the game myself, I could find the identifiers for each character's sprites and pass that through PyBoy to find the location of each character in real time. From there, all I had to do was write the bot itself, which may have been the simplest part of the process.
+Thankfully, PyBoy offers some helpful debugging tools that let me proceed. By observing the sprite and tile data tables as I played the game myself, I could find the identifiers for each character's sprites and pass that through PyBoy to find the location of each character in real time.
 
 ### Bots
 
-The first bot I wrote was for Manhole. This one simply checks if a character is about to fall off the bridge, and positions the player to catch them if so. This one can play the game indefinitely.
+The first bot I wrote was for Manhole. This one uses the sprite positions collected above to determine if a character is about to fall off the bridge, and positions the player to catch them if so. This one can play the game indefinitely.
 
 <img src="https://github.com/jedmijares/Watch-Me-Game/blob/main/media/manhole.gif" width="250" />
 
