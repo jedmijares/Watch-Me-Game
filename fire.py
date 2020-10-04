@@ -47,17 +47,10 @@ def getNPClocations(spriteList):
 
 # move to the proper location to pick up the next NPC about to fall
 def move(dir1, dir1Release, dir2 = None, dir2Release = None):
-    previousScore = getScore()
     emu.send_input(dir1)
     emu.tick()
     emu.send_input(dir1Release)
-    if(dir2):
-        emu.tick()
-        emu.send_input(dir2)
-        emu.tick()
-        emu.send_input(dir2Release)
-    # while ((previousScore == getScore())): # do not move until you've picked up this NPC
-    #     emu.tick()
+    emu.tick()
 
 # navigate to Fire game
 for _ in range(360):
@@ -109,6 +102,7 @@ for _ in range(12):
     emu.tick()
 emu.send_input(WindowEvent.RELEASE_BUTTON_A)
 
+misses = 0
 while not emu.tick():
     # sprite identifer for the NPC characters range from 65 - 68 for the left person, 96 - 99 for the center, and 120 - 123 for the right
     manSpriteIndices = emu.botsupport_manager().sprite_by_tile_identifier([65, 96, 120])
@@ -118,10 +112,16 @@ while not emu.tick():
 
         # these are the possible x/y coordinates of NPCs that are about to hit the ground
         if (24, 102) == NPClocations[0]:
-            move(WindowEvent.PRESS_ARROW_LEFT, WindowEvent.RELEASE_ARROW_LEFT, WindowEvent.PRESS_ARROW_LEFT, WindowEvent.RELEASE_ARROW_LEFT)
+            move(WindowEvent.PRESS_ARROW_LEFT, WindowEvent.RELEASE_ARROW_LEFT)
+            move(WindowEvent.PRESS_ARROW_LEFT, WindowEvent.RELEASE_ARROW_LEFT)
         elif (64, 102) == NPClocations[0]:
-            move(WindowEvent.PRESS_ARROW_RIGHT, WindowEvent.RELEASE_ARROW_RIGHT, WindowEvent.PRESS_ARROW_RIGHT, WindowEvent.RELEASE_ARROW_RIGHT)
+            move(WindowEvent.PRESS_ARROW_RIGHT, WindowEvent.RELEASE_ARROW_RIGHT)
+            move(WindowEvent.PRESS_ARROW_RIGHT, WindowEvent.RELEASE_ARROW_RIGHT)
             move(WindowEvent.PRESS_ARROW_LEFT, WindowEvent.RELEASE_ARROW_LEFT)
         elif (102, 100) == NPClocations[0]:
-            move(WindowEvent.PRESS_ARROW_RIGHT, WindowEvent.RELEASE_ARROW_RIGHT, WindowEvent.PRESS_ARROW_RIGHT, WindowEvent.RELEASE_ARROW_RIGHT)
-    pass
+            move(WindowEvent.PRESS_ARROW_RIGHT, WindowEvent.RELEASE_ARROW_RIGHT)
+            move(WindowEvent.PRESS_ARROW_RIGHT, WindowEvent.RELEASE_ARROW_RIGHT)
+    
+    # if misses != getMissCount():
+    #     misses += 1
+    #     print("miss", misses)
