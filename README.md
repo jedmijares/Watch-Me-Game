@@ -2,7 +2,11 @@
 
 This is my submission for VandyHacks 2020! The theme is retro, so I figured I'd take my project all the way back to 1981. Watch Me Game is a bot to play [Game & Watch Gallery](https://en.wikipedia.org/wiki/Game_%26_Watch_Gallery), a retro collection of even more retro handheld electronic games. It's written in Python using [PyBoy](https://github.com/Baekalfen/PyBoy).
 
-## Process
+## Running Project
+
+If you want to try it out, you need to [install PyBoy](https://github.com/Baekalfen/PyBoy/wiki/Installation) and acquire a Game & Watch Gallery ROM (can't help you with that one). Simply place the ROM in the directory specified in the script or pass the filepath as an argument.
+
+## Development Process
 
 Step one was to figure out how to process data in the game. PyBoy comes with wrappers that facilitate this for a few games, but Game & Watch Gallery is unfortunately not one of them. So, I dug into the game myself to figure out how to pull out that info into my script.
 
