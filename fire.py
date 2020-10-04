@@ -41,25 +41,26 @@ def getNPClocations(spriteList):
     for sublist in spriteList:
         for spriteIndex in sublist:
             NPCsprite = emu.botsupport_manager().sprite(spriteIndex)
-            if NPCsprite.x in {32, 80, 72, 120}: # these are the only x positions that NPCs about to fall appear
+            if True: #NPCsprite.x in {32, 80, 72, 120}: # these are the only x positions that NPCs about to fall appear
                 NPClocations.append((NPCsprite.x, NPCsprite.y))
     return NPClocations
 
 # move to the proper location to pick up the next NPC about to fall
-def move(dir1, dir1Release, dir2, dir2Release):
+def move(dir1, dir1Release, dir2 = None, dir2Release = None):
     previousScore = getScore()
     emu.send_input(dir1)
     emu.tick()
-    emu.send_input(dir2)
-    emu.tick()
     emu.send_input(dir1Release)
-    emu.tick()
-    emu.send_input(dir2Release)
-    while ((previousScore == getScore())): # do not move until you've picked up this NPC
+    if(dir2):
         emu.tick()
+        emu.send_input(dir2)
+        emu.tick()
+        emu.send_input(dir2Release)
+    # while ((previousScore == getScore())): # do not move until you've picked up this NPC
+    #     emu.tick()
 
 # navigate to Fire game
-for _ in range(480):
+for _ in range(360):
     emu.tick()
 emu.send_input(WindowEvent.PRESS_BUTTON_A)
 for _ in range(12):
@@ -79,12 +80,12 @@ for _ in range(12):
 emu.send_input(WindowEvent.RELEASE_BUTTON_A)
 for _ in range(60):
     emu.tick()
-for _ in range(60):
-    emu.tick()
 emu.send_input(WindowEvent.PRESS_ARROW_DOWN)
 for _ in range(12):
     emu.tick()
 emu.send_input(WindowEvent.RELEASE_ARROW_DOWN)
+for _ in range(60):
+    emu.tick()
 emu.send_input(WindowEvent.PRESS_BUTTON_A)
 for _ in range(12):
     emu.tick()
@@ -109,20 +110,18 @@ for _ in range(12):
 emu.send_input(WindowEvent.RELEASE_BUTTON_A)
 
 while not emu.tick():
-    # sprite identifer for the NPC characters range from 16 - 23 and 32 - 39
-    # 32 - 39 is just the "bottom half" of the character, so we don't need it for finding their locations
-    # we can iterate by 2 because the NPC is 2 sprites wide
+    # sprite identifer for the NPC characters range from 65 - 68 for the left person, 96 - 99 for the center, and 120 - 123 for the right
+    manSpriteIndices = emu.botsupport_manager().sprite_by_tile_identifier([65, 96, 120])
+    NPClocations = (getNPClocations(manSpriteIndices))
+    if(NPClocations):
+        # print(NPClocations)
 
-    # manSpriteIndices = emu.botsupport_manager().sprite_by_tile_identifier(list(range(16,24,2)))
-    # NPClocations = (getNPClocations(manSpriteIndices))
-    # if(NPClocations):
-    #     # print(NPClocations)
-    #     if (32, 25) == NPClocations[0]:
-    #         move(WindowEvent.PRESS_ARROW_LEFT, WindowEvent.RELEASE_ARROW_LEFT, WindowEvent.PRESS_ARROW_UP, WindowEvent.RELEASE_ARROW_UP)
-    #     elif (80, 25) == NPClocations[0]:
-    #         move(WindowEvent.PRESS_ARROW_RIGHT, WindowEvent.RELEASE_ARROW_RIGHT, WindowEvent.PRESS_ARROW_UP, WindowEvent.RELEASE_ARROW_UP)
-    #     elif (72, 89) == NPClocations[0]:
-    #         move(WindowEvent.PRESS_ARROW_LEFT, WindowEvent.RELEASE_ARROW_LEFT, WindowEvent.PRESS_ARROW_DOWN, WindowEvent.RELEASE_ARROW_DOWN)
-    #     elif (120, 89) == NPClocations[0]:
-    #         move(WindowEvent.PRESS_ARROW_RIGHT, WindowEvent.RELEASE_ARROW_RIGHT, WindowEvent.PRESS_ARROW_DOWN, WindowEvent.RELEASE_ARROW_DOWN)   
+        # these are the possible x/y coordinates of NPCs that are about to hit the ground
+        if (24, 102) == NPClocations[0]:
+            move(WindowEvent.PRESS_ARROW_LEFT, WindowEvent.RELEASE_ARROW_LEFT, WindowEvent.PRESS_ARROW_LEFT, WindowEvent.RELEASE_ARROW_LEFT)
+        elif (64, 102) == NPClocations[0]:
+            move(WindowEvent.PRESS_ARROW_RIGHT, WindowEvent.RELEASE_ARROW_RIGHT, WindowEvent.PRESS_ARROW_RIGHT, WindowEvent.RELEASE_ARROW_RIGHT)
+            move(WindowEvent.PRESS_ARROW_LEFT, WindowEvent.RELEASE_ARROW_LEFT)
+        elif (102, 100) == NPClocations[0]:
+            move(WindowEvent.PRESS_ARROW_RIGHT, WindowEvent.RELEASE_ARROW_RIGHT, WindowEvent.PRESS_ARROW_RIGHT, WindowEvent.RELEASE_ARROW_RIGHT)
     pass
