@@ -6,7 +6,7 @@ This is my submission for VandyHacks 2020! The theme is retro, so I figured I'd 
 
 Step one was to figure out how to process data in the game. PyBoy comes with wrappers that facilitate this for a few games, but Game & Watch Gallery is unfortunately not one of them. So, I dug into the game myself to figure out how to pull out that info into my script.
 
-Finding integer values like the current score was simple enough - I used [VBA-M's](https://github.com/visualboyadvance-m/visualboyadvance-m) cheat engine to find the memory location where the values were held and was able to use PyBoy to read that data. Grabbing the position of various characters on the screen, however, was more troublesome. For a little while, I fumbled around trying to find another memory location storing the position of each character would be saved, but I didn't have any luck as I had no idea how that value might be represented.
+Finding integer values like the current game score was simple enough - I used [VBA-M's](https://github.com/visualboyadvance-m/visualboyadvance-m) cheat engine to find the memory location where the values were held and was able to use PyBoy to read that data. Grabbing the position of various characters on the screen, however, was more troublesome. For a little while, I fumbled around trying to find another memory location storing the position of each character would be saved, but I didn't have any luck as I had no idea how that value might be represented.
 
 <img src="https://github.com/jedmijares/Watch-Me-Game/blob/main/media/spriteDebugging.png" alt="Debug Interface" width="600"/>
 
