@@ -24,4 +24,4 @@ The second one is for Fire. It operates very similarly, but this one usually onl
 
 ## Next Steps
 
-Initially I was interested in developing neural nets to play some of the games in this collection, but I ended up deciding that was out of my purview for this weekend. If I revisit this project in the future I'll be reconsidering writing another bot implementing that.
+Initially I was interested in developing neural nets to play some of the games in this collection, but I ended up deciding that was out of my purview for this weekend. If I revisit this project in the future I'll be reconsidering writing another bot implementing that for one of the more complex games.
