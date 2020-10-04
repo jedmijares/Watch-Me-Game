@@ -102,7 +102,8 @@ for _ in range(12):
     emu.tick()
 emu.send_input(WindowEvent.RELEASE_BUTTON_A)
 
-misses = 0
+# score = 1
+state = 0
 while not emu.tick():
     # sprite identifer for the NPC characters range from 65 - 68 for the left person, 96 - 99 for the center, and 120 - 123 for the right
     manSpriteIndices = emu.botsupport_manager().sprite_by_tile_identifier([65, 96, 120])
@@ -112,16 +113,37 @@ while not emu.tick():
 
         # these are the possible x/y coordinates of NPCs that are about to hit the ground
         if (24, 102) == NPClocations[0]:
-            move(WindowEvent.PRESS_ARROW_LEFT, WindowEvent.RELEASE_ARROW_LEFT)
-            move(WindowEvent.PRESS_ARROW_LEFT, WindowEvent.RELEASE_ARROW_LEFT)
-        elif (64, 102) == NPClocations[0]:
-            move(WindowEvent.PRESS_ARROW_RIGHT, WindowEvent.RELEASE_ARROW_RIGHT)
-            move(WindowEvent.PRESS_ARROW_RIGHT, WindowEvent.RELEASE_ARROW_RIGHT)
-            move(WindowEvent.PRESS_ARROW_LEFT, WindowEvent.RELEASE_ARROW_LEFT)
+            if state == 2:
+                move(WindowEvent.PRESS_ARROW_LEFT, WindowEvent.RELEASE_ARROW_LEFT)
+                move(WindowEvent.PRESS_ARROW_LEFT, WindowEvent.RELEASE_ARROW_LEFT)
+            if state == 1:
+                move(WindowEvent.PRESS_ARROW_LEFT, WindowEvent.RELEASE_ARROW_LEFT)
+            state = 0
         elif (102, 100) == NPClocations[0]:
+            if state == 0:
+                move(WindowEvent.PRESS_ARROW_RIGHT, WindowEvent.RELEASE_ARROW_RIGHT)
+                move(WindowEvent.PRESS_ARROW_RIGHT, WindowEvent.RELEASE_ARROW_RIGHT)
+            if state == 1:
+                move(WindowEvent.PRESS_ARROW_RIGHT, WindowEvent.RELEASE_ARROW_RIGHT)
+            state = 2
+        else: # (64, 102) == NPClocations[0]:
+            if state == 0:
+                move(WindowEvent.PRESS_ARROW_RIGHT, WindowEvent.RELEASE_ARROW_RIGHT)
+            # move(WindowEvent.PRESS_ARROW_RIGHT, WindowEvent.RELEASE_ARROW_RIGHT)
+            if state == 2:
+                move(WindowEvent.PRESS_ARROW_LEFT, WindowEvent.RELEASE_ARROW_LEFT)
+            state = 1
+    else: # (64, 102) == NPClocations[0]:
+        if state == 0:
             move(WindowEvent.PRESS_ARROW_RIGHT, WindowEvent.RELEASE_ARROW_RIGHT)
-            move(WindowEvent.PRESS_ARROW_RIGHT, WindowEvent.RELEASE_ARROW_RIGHT)
-    
+        # move(WindowEvent.PRESS_ARROW_RIGHT, WindowEvent.RELEASE_ARROW_RIGHT)
+        if state == 2:
+            move(WindowEvent.PRESS_ARROW_LEFT, WindowEvent.RELEASE_ARROW_LEFT)
+        state = 1
+        # score += 1
+        # while score != getScore():
+        #     emu.tick()
+
     # if misses != getMissCount():
     #     misses += 1
     #     print("miss", misses)
