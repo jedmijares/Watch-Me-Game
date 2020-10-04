@@ -16,11 +16,11 @@ Thankfully, PyBoy offers some helpful debugging tools that let me proceed. By ob
 
 The first bot I wrote was for Manhole. This one simply checks if a character is about to fall off the bridge, and positions the player to catch them if so. This one can play the game indefinitely.
 
-<img src="https://github.com/jedmijares/Watch-Me-Game/blob/main/media/manhole.gif" width="200" height="200" />
+<img src="https://github.com/jedmijares/Watch-Me-Game/blob/main/media/manhole.gif" width="250" />
 
 The second one is for Fire. It operates very similarly, but this one usually only manages to score a few dozen points before losing the game.
 
-<img src="https://github.com/jedmijares/Watch-Me-Game/blob/main/media/fire.gif" width="200" height="200" />
+<img src="https://github.com/jedmijares/Watch-Me-Game/blob/main/media/fire.gif" width="250" />
 
 ## Next Steps
 
