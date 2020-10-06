@@ -1,6 +1,6 @@
 # Watch Me Game
 
-This is my submission for VandyHacks 2020! The theme is retro, so I figured I'd take my project all the way back to 1981. Watch Me Game is a bot to play [Game & Watch Gallery](https://en.wikipedia.org/wiki/Game_%26_Watch_Gallery), a retro collection of even more retro handheld electronic games. It's written in Python using [PyBoy](https://github.com/Baekalfen/PyBoy).
+This is my submission for VandyHacks 2020! The theme is retro, so I figured I'd take my project all the way back to 1981. Watch Me Game is a bot that automatically plays [Game & Watch Gallery](https://en.wikipedia.org/wiki/Game_%26_Watch_Gallery), a retro collection of even more retro handheld electronic games. It's written in Python using [PyBoy](https://github.com/Baekalfen/PyBoy).
 
 ## Running Project
 
